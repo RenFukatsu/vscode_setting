@@ -1,70 +1,9 @@
-// 既定値を上書きするには、このファイル内にキー バインドを挿入しますauto[]
 [
-    //----------------------------------------------------------
-    // エディターにフォーカスしている時の設定 (editor->editorへの移動)
-    //----------------------------------------------------------
-    // 実装箇所にコードジャンプ
-    {
-        "key": "ctrl+u ctrl+i",
-        "command": "editor.action.goToImplementation",
-        "when": "editorFocus"
-    },
-    // 宣言箇所に移動
-    {
-        "key": "ctrl+u ctrl+d",
-        "command": "editor.action.goToDeclaration",
-        "when": "editorFocus"
-    },
-    // 手前のエディターに移動
-    {
-        "key": "ctrl+w ctrl+h",
-        "command": "workbench.action.focusPreviousGroup",
-    },
-    // 後のエディターに移動
-    {
-        "key": "ctrl+w ctrl+l",
-        "command": "workbench.action.focusNextGroup",
-    },
-    // サイドバーへ移動
-    {
-        "key": "ctrl+e",
-        "command": "workbench.action.focusSideBar",
-    },
-    // サイドバーからの移動 (ctrl+hをhにしてctrlを話すだけで切り替わる)
-    {
-        "key": "ctrl+u ctrl+g",
-        "command": "workbench.action.findInFiles",
-        "when": "!searchInputBoxFocus"
-    },
-    // 検索実行後の候補への移動
-    {
-        "key": "ctrl+n",
-        "command": "workbench.action.interactivePlayground.arrowDown",
-        "when": "interactivePlaygroundFocus && !editorTextFocus"
-    },
-    // ファイルの検索に入る
-    {
-        "key": "ctrl+u ctrl+u",
-        "command": "workbench.action.quickOpen"
-    },
-
-    //----------------------------------------------------------
-    // カーソル移動(editor(ui移動はなし))
-    //----------------------------------------------------------
-    //入力モードでカーソルをみぎにずらす
-    {
-        "key": "ctrl+l",
-        "command": "cursorRight",
-        "when": "editorTextFocus && !editorReadOnly && vim.mode == 'Insert'"
-    },
-
-    //----------------------------------------------------------
-    // サジェストの選択(ui移動はなし)
-    //----------------------------------------------------------
     // サジェストの選択
     {
         "key": "ctrl+k",
-        "command": "acceptSelectedSuggestion"
+        "command": "acceptSelectedSuggestion",
+        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
     },
     // 候補のフォーカスを下へ移動
     {
@@ -78,71 +17,7 @@
         "command": "selectPrevSuggestion",
         "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
     },
-    // ヒントサジェストを下へ移動
-    {
-        "key": "ctrl+n",
-        "command": "showNextParameterHint",
-        "when": "editorTextFocus && parameterHintsMultipleSignatures && parameterHintsVisible"
-    },
-    // リスト系の選択のフォーカスを下へ移動
-    {
-        "key": "ctrl+n",
-        "command": "list.focusDown",
-        "when": "listFocus"
-    },
-    // 検索画面の選択のフォーカスを下へ移動
-    {
-        "key": "ctrl+n",
-        "command": "search.focus.nextInputBox",
-        "when": "inputBoxFocus && searchViewletVisible"
-    },
-    // サジェストのキャンセル
-    {
-        "key": "ctrl+[",
-        "command": "search.action.cancel",
-        "when": "listFocus && searchViewletVisible"
-    },
-
-    //----------------------------------------------------------
-    // 設定画面のみ有効なサジェストの選択(ui移動はなし)
-    //----------------------------------------------------------
-    // 候補のフォーカスを下へ移動
-    {
-        "key": "ctrl+n",
-        "command": "settings.action.focusSettingsFile",
-        "when": "inSettingsSearch"
-    },
-    // 候補のフォーカスを下へ移動
-    {
-        "key": "ctrl+n",
-        "command": "keybindings.editor.focusKeybindings",
-        "when": "inKeybindings && inKeybindingsSearch"
-    },
-    // サジェストのキャンセル
-    {
-        "key": "ctrl+[",
-        "command": "settings.action.clearSearchResults",
-        "when": "inSettingsSearch"
-    },
-    // サジェストのキャンセル
-    {
-        "key": "ctrl+[",
-        "command": "keybindings.editor.clearSearchResults",
-        "when": "inKeybindings && inKeybindingsSearch"
-    },
-
-    //----------------------------------------------------------
-    // workbenchのクイックオープンの挙動(ui移動はなし)
-    //----------------------------------------------------------
-    {
-        "key": "ctrl+[",
-        "command": "workbench.action.closeQuickOpen",
-        "when": "inQuickOpen"
-    },
-
-    //----------------------------------------------------------
-    // サイドバーでのファイル編集
-    //----------------------------------------------------------
+    // ファイル制御
     {
         "key": "ctrl+r",
         "command": "renameFile",
@@ -158,179 +33,10 @@
         "command": "explorer.newFolder",
         "when": "explorerViewletVisible && filesExplorerFocus"
     },
-    //----------------------------------------------------------
-    // サイドバーのファイルをエディターで開く(サイドバー -> エディター)
-    //----------------------------------------------------------
-    {
-        "key": "ctrl+l",
-        "command": "explorer.openToSide",
-        "when": "explorerViewletFocus && explorerViewletVisible"
-    },
-    //----------------------------------------------------------
-    // Explorer UI(*->デバッグモードへの移動)
-    //----------------------------------------------------------
     {
         "key": "ctrl+o ctrl+e",
         "command": "workbench.view.explorer"
     },
-    {
-        "key": "ctrl+o e",
-        "command": "workbench.view.explorer"
-    },
-
-    //----------------------------------------------------------
-    // デバッグモードUI(*->デバッグモードへの移動)
-    //----------------------------------------------------------
-    {
-        "key": "ctrl+o ctrl+d",
-        "command": "workbench.view.debug"
-    },
-    {
-        "key": "ctrl+o d",
-        "command": "workbench.view.debug"
-    },
-
-    //----------------------------------------------------------
-    // バージョン管理UI(*->バージョン管理UIへの移動)
-    //----------------------------------------------------------
-    {
-        "key": "ctrl+o ctrl+g",
-        "command": "workbench.view.scm"
-    },
-    {
-        "key": "ctrl+o g",
-        "command": "workbench.view.scm"
-    },
-    //----------------------------------------------------------
-    // コマンドパレットオープン(*->コマンドパレット)
-    //----------------------------------------------------------
-    {
-        "key": "ctrl+o ctrl+o",
-        "command": "workbench.action.showCommands"
-    },
-    {
-        "key": "ctrl+o o",
-        "command": "workbench.action.showCommands"
-    },
-
-    //----------------------------------------------------------
-    // vscodeのviewを選択(*->*)
-    //----------------------------------------------------------
-    {
-        "key": "ctrl+o ctrl+v",
-        "command": "workbench.action.quickOpenView"
-    },
-    {
-        "key": "ctrl+o v",
-        "command": "workbench.action.quickOpenView"
-    },
-
-    //----------------------------------------------------------
-    // vscodeのviewを選択(*->*)
-    //----------------------------------------------------------
-    {
-        "key": "tab",
-        "command": "editor.emmet.action.expandAbbreviation",
-        // "when": "explorerViewletVisible && !searchViewletVisible && !inDebugMode && vim.mode != 'SearchInProgressMode' && vim.mode != 'Insert'"
-        "when": "explorerViewletVisible && !inDebugMode && vim.mode != 'SearchInProgressMode' && vim.mode != 'Insert'"
-    },
-    //----------------------------------------------------------
-    // sidebarの検索キャンセル(*->terminal)
-    //----------------------------------------------------------
-    {
-        "key": "ctrl+[",
-        "command": "list.toggleKeyboardNavigation",
-        "when": "listFocus && listSupportsKeyboardNavigation"
-    },
-    //----------------------------------------------------------
-    // gitの操作系(uiの移動なし)
-    //----------------------------------------------------------
-    {
-        "key": "g c",
-        "command": "git.commit",
-        "when": "editorTextFocus && vim.mode == 'Normal'"
-    },
-    {
-        "key": "g s",
-        "command": "git.stage",
-        "when": "editorTextFocus && vim.mode == 'Normal'"
-    },
-    {
-        "key": "g a",
-        "command": "git.stageAll",
-        "when": "editorTextFocus && vim.mode == 'Normal'"
-    },
-    {
-        "key": "g p",
-        "command": "git.push",
-        "when": "editorTextFocus && vim.mode == 'Normal'"
-    },
-    {
-        "key": "g g",
-        "command": "cursorTop",
-        "when": "editorTextFocus && vim.mode == 'Normal'"
-    },
-    {
-        "key": "ctrl+shift+w",
-        "command": "workbench.action.closeActiveEditor"
-    },
-    {
-        "key": "ctrl+w",
-        "command": "-workbench.action.closeActiveEditor"
-    },
-    //----------------------------------------------------------
-    // vimのデフォルトキーの設定オフ
-    //----------------------------------------------------------
-    {
-        "key": "ctrl+b",
-        "command": "-extension.vim_ctrl+b",
-        "when": "editorTextFocus && vim.active && vim.use<C-b> && !inDebugRepl && vim.mode != 'Insert'"
-    },
-    {
-        "key": "ctrl+f",
-        "command": "-extension.vim_ctrl+f",
-        "when": "editorTextFocus && vim.active && vim.use<C-f> && !inDebugRepl && vim.mode != 'Insert'"
-    },
-    {
-        "key": "ctrl+d",
-        "command": "-extension.vim_ctrl+d",
-        "when": "editorTextFocus && vim.active && !inDebugRepl"
-    },
-    {
-        "key": "ctrl+u",
-        "command": "-extension.vim_ctrl+u",
-        "when": "editorTextFocus && vim.active && vim.use<C-u> && !inDebugRepl"
-    },
-    {
-        "key": "ctrl+j",
-        "command": "-extension.vim_ctrl+j",
-        "when": "editorTextFocus && vim.active && vim.use<C-j> && !inDebugRepl"
-    },
-    {
-        "key": "ctrl+k",
-        "command": "-extension.vim_ctrl+k",
-        "when": "editorTextFocus && vim.active && vim.use<C-k> && !inDebugRepl"
-    },
-    {
-        "key": "ctrl+[",
-        "command": "-extension.vim_ctrl+[",
-        "when": "editorTextFocus && vim.active && vim.use<C-[> && !inDebugRepl"
-    },
-    {
-        "key": "ctrl+]",
-        "command": "-extension.vim_ctrl+]",
-        "when": "editorTextFocus && vim.active && vim.use<C-]> && !inDebugRepl"
-    },
-    //----------------------------------------------------------
-    // terminalのトグル設定
-    //----------------------------------------------------------
-    {
-        "key": "ctrl+;",
-        "command": "workbench.action.togglePanel"
-    },
-    //----------------------------------------------------------
-    // タブ切り替え
-    //----------------------------------------------------------
     {
         "key": "ctrl+h",
         "command": "workbench.action.previousEditor",
@@ -339,35 +45,18 @@
     {
         "key": "ctrl+l",
         "command": "workbench.action.nextEditor",
-        "when": "!sideBarFocus && vim.mode != 'Insert'"
+        "when": "!findWidgetVisible && !sideBarFocus && vim.mode != 'Insert'"
     },
-    //----------------------------------------------------------
-    // Ctrl+nで次の検索位置に行く
-    //----------------------------------------------------------
     {
-        "key": "ctrl+n",
-        "command": "editor.action.nextMatchFindAction",
-        "when": "editorFocus && findInputFocussed"
-    },
-    //----------------------------------------------------------
-    // 検索画面の終了
-    //----------------------------------------------------------
-    {
-        "key": "j j",
+        "key": "ctrl+q",
         "command": "closeFindWidget",
         "when": "editorFocus && findWidgetVisible"
     },
-    //----------------------------------------------------------
-    // Insertモードの時，Ctrl+jで改行
-    //----------------------------------------------------------
     {
-        "key": "ctrl+j",
-        "command": "editor.action.insertLineAfter",
-        "when": "vim.mode == 'Insert'"
+        "key": "ctrl+q",
+        "command": "closeMarkersNavigation",
+        "when": "editorFocus && markersNavigationVisible"
     },
-    //----------------------------------------------------------
-    // Normalモードの時，文頭，文末に移動
-    //----------------------------------------------------------
     {
         "key": "space l",
         "command": "cursorEnd",
@@ -378,113 +67,46 @@
         "command": "cursorHome",
         "when": "!sideBarFocus && textInputFocus && vim.mode != 'Insert'"
     },
-    //----------------------------------------------------------
-    // :w,:qを w, qにする．
-    //----------------------------------------------------------
     {
-        "key": "Space w",
+        "key": "space w",
         "command": "workbench.action.files.save",
         "when": "!sideBarFocus && textInputFocus && vim.mode != 'Insert'"
     },
     {
-        "key": "Space q",
+        "key": "space q",
         "command": "workbench.action.closeActiveEditor",
         "when": "!sideBarFocus && textInputFocus && vim.mode != 'Insert'"
     },
     {
-        "key": "Space s",
+        "key": "space s",
         "command": "workbench.action.splitEditor",
-        "when": "!sideBarFocus && textInputFocus && vim.mode != 'Insert'"
-    },
-    //----------------------------------------------------------
-    // Problem View
-    //----------------------------------------------------------
-    {
-        "key": ".",
-        "command": "editor.action.marker.nextInFiles",
-        "when": "editorFocus && !editorReadonly && vim.mode != 'Insert'"
+        "when": "!sideBarFocus && textInputFocus && vim.mode == 'Normal'"
     },
     {
-        "key": "shift+.",
-        "command": "editor.action.marker.prevInFiles",
-        "when": "editorFocus && !editorReadonly && vim.mode != 'Insert'"
+        "key": "ctrl+j",
+        "command": "workbench.action.togglePanel",
+        "when": "vim.mode != 'Insert'"
     },
     {
-        "key": "j j",
-        "command": "closeMarkersNavigation",
-        "when": "editorFocus && markersNavigationVisible && vim.mode != 'Insert'"
-    },
-    //----------------------------------------------------------
-    // fold control
-    //----------------------------------------------------------
-    {
-        "key": "ctrl+shift+[",
-        "command": "editor.foldAll",
-        "when": "editorTextFocus && foldingEnabled && vim.mode != 'Insert'"
+        "key": "ctrl+;",
+        "command": "workbench.action.terminal.toggleTerminal"
     },
     {
-        "key": "ctrl+k ctrl+0",
-        "command": "-editor.foldAll",
-        "when": "editorTextFocus && foldingEnabled"
+        "key": "ctrl+b",
+        "command": "workbench.action.toggleSidebarVisibility"
     },
     {
-        "key": "ctrl+shift+[",
-        "command": "-editor.fold",
-        "when": "editorTextFocus && foldingEnabled"
+        "key": "ctrl+w",
+        "command": "workbench.action.closeActiveEditor"
     },
     {
-        "key": "ctrl+shift+]",
-        "command": "editor.unfoldAll",
-        "when": "editorTextFocus && foldingEnabled && vim.mode != 'Insert'"
+        "key": "ctrl+oem_4",
+        "command": "-extension.vim_ctrl+[",
+        "when": "editorTextFocus && vim.active && vim.use<C-[> && !inDebugRepl"
     },
     {
-        "key": "ctrl+k ctrl+j",
-        "command": "-editor.unfoldAll",
-        "when": "editorTextFocus && foldingEnabled"
+        "key": "ctrl+oem_6",
+        "command": "-extension.vim_ctrl+]",
+        "when": "editorTextFocus && vim.active && vim.use<C-]> && !inDebugRepl"
     },
-    {
-        "key": "ctrl+shift+]",
-        "command": "-editor.unfold",
-        "when": "editorTextFocus && foldingEnabled"
-    },
-
-    //----------------------------------------------------------
-    // Definition & Reference
-    //----------------------------------------------------------
-    {
-        "key": "f",
-        "command": "editor.action.revealDefinition",
-        "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor && vim.mode != 'Insert'"
-    },
-    {
-        "key": "shift+f",
-        "command": "editor.action.goToReferences",
-        "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor && vim.mode != 'Insert'"
-    },
-    //----------------------------------------------------------
-    // Cursor undo redo
-    //----------------------------------------------------------
-    {
-        "key": "shift+u",
-        "command": "cursorUndo",
-        "when": "textInputFocus && vim.mode == 'Normal'"
-    },
-    {
-        "key": "shift+r",
-        "command": "cursorRedo",
-        "when": "textInputFocus && vim.mode == 'Normal'"
-    },
-    //----------------------------------------------------------
-    // terminal focus
-    //----------------------------------------------------------
-    {
-        "key": ";",
-        "command": "workbench.action.terminal.focus",
-        "when": "editorTextFocus && vim.mode == 'Normal'"
-    },
-    {
-        "key": ";",
-        "command": "workbench.action.focusLastEditorGroup",
-        "when": "terminalFocus"
-    }
 ]
